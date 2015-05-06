@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+	<meta charset="utf-8" />
+	<title>Enterprise Linchpin</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="assets/css/metro.css" rel="stylesheet" />
+	<link href="assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+	<link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+	<link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+	<link href="assets/css/style.css" rel="stylesheet" />
+	<link href="assets/css/style_responsive.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="assets/chosen-bootstrap/chosen/chosen.css" />
+	<link rel="stylesheet" type="text/css" href="assets/uniform/css/uniform.default.css" />
+	<link rel="shortcut icon" href="images/linchpin.jpeg" />
+    <script src="assets/js/jquery-2.1.3.min.js"></script>
+    <script src="assets/highcharts/highcharts.js"></script>
+    <script src="assets/highcharts/exporting.js"></script>
+    <script src="javascripts/financialDashboard.js"></script>
+    <script src="javascripts/retailDashboard.js"></script>
+    <script src="javascripts/sentimentDashboard.js"></script>
+    <script type="text/javascript" src="javascripts/ajax_calls.js"></script>
+    <script src="javascripts/main.js"></script>
+
+
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+<!-- BEGIN HEADER -->
+<div id="includedHeaderContent">
+
+
+    <!-- BEGIN HEADER -->
+    <div class="header navbar navbar-inverse navbar-fixed-top">
+        <!-- BEGIN TOP NAVIGATION BAR -->
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <!-- BEGIN LOGO -->
+
+                <a class="brand" href="home.html" style="padding: 0px;margin: 0px;">
+                    <img id="companyImage" src="" alt="" style="width: 24%;height: 30%;" />
+                   Linchpin
+                </a>
+                <a href="#widgetModal" role="button" class="icon-plus"
+                   data-toggle="modal" style="color: white;text-decoration: none;font-size: larger;position: absolute;top: 10px;left:200px;">&nbsp; Widgets</a>
+                <a href="#dashboardModal" role="button" class="icon-plus" id="addDashboard"
+                   data-toggle="modal" style="color: white;text-decoration: none;font-size: larger;position: absolute;top: 10px;left: 310px;">&nbsp; Dashboard</a>
+                <div style="position: absolute;top: 10px; left: 430px;" id="outerFilterDiv">
+                    <input name="filterTextField" type="text" id="filterTextField" tabindex="2"  style="width: 140px;
+        position: absolute; top: 1px; left: 1px; z-index: 2;border:none;" />
+                    <div style="position: absolute;" id="filterDropdownDiv">
+                        <select name="filterDropDown" id="filterDropDown" tabindex="1000"
+                                 style="position: absolute;
+        top: 0px; left: 0px; z-index: 1; width: 165px;">
+                            <option value="-1" selected="selected" >-- Select Dashboard --</option>
+                        </select>
+
+                    </div>
+                </div>
+                <a href="#updateDashboardModal" role="button" class="icon-cog" id="modifyDashboard"
+                   data-toggle="modal" style="color: white;text-decoration: none;font-size: larger;position: absolute;top: 10px;left: 630px;">&nbsp; Dashboard</a>
+                <a href="#" role="button" class="icon-remove" id="deleteDashboard"
+                   style="color: white;text-decoration: none;font-size: larger;position: absolute;top: 10px;left: 750px;">&nbsp; Dashboard</a>
+                <!-- END LOGO -->
+                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+                    <img src="assets/img/menu-toggler.png" alt="" />
+                </a>
+
+                <!-- END RESPONSIVE MENU TOGGLER -->
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                <ul class="nav pull-right">
+
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+                    <li class="dropdown user">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-user icon-white"></i>
+                            <span class="username" id="usernameUI"></span>
+                            <i class="icon-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+
+                            <li class="divider"></li>
+                            <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+                        </ul>
+                    </li>
+                    <!-- END USER LOGIN DROPDOWN -->
+                </ul>
+                <!-- END TOP NAVIGATION MENU -->
+            </div>
+        </div>
+        <!-- END TOP NAVIGATION BAR -->
+    </div>
+
+    <div id="widgetModal" class="modal hide fade" tabindex="-1"
+         role="dialog" aria-labelledby="myModalLabel1"
+         aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"
+                    aria-hidden="true"></button>
+            <h3 id="myModalLabel1">ADD Widgets</h3>
+        </div>
+        <div class="modal-body">
+            <!--BEGIN TABS-->
+            <div class="tabbable tabbable-custom tabs-left">
+                <!-- Only required for left/right tabs -->
+                <ul class="nav nav-tabs tabs-left">
+                    <li class="active"><a href="#social" data-toggle="tab">Social</a></li>
+                    <li><a href="#financial" data-toggle="tab">Financial</a></li>
+                    <li><a href="#retail" data-toggle="tab">Retail</a></li>
+                    <li><a href="#sentiment" data-toggle="tab">Social Mention</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="social">
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Facebook Feeds <a href="#" class="btn purple-stripe" style="margin-left: 36%;" id="fbFeeds">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Facebook Stats <a href="#" class="btn purple-stripe" style="margin-left: 37%;" id="fbStats">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Twitter Tweets <a href="#" class="btn purple-stripe" style="margin-left: 38%;" id="twitterTweets">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Twitter Stats <a href="#" class="btn purple-stripe" style="margin-left: 40%;" id="twitterStats">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >YouTube Feeds<a href="#" class="btn purple-stripe" style="margin-left: 37%;" id="youTubeFeeds">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >YouTube Stats<a href="#" class="btn purple-stripe" style="margin-left: 38%;" id="youTubeStats">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="tab-pane" id="financial">
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Revenue YTD <a href="#" class="btn purple-stripe" style="margin-left: 40%;" id="revenueYtd">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Global Financial Performance <a href="#" class="btn purple-stripe" style="margin-left:21.5%;" id="globalFinancePerf">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Short Term Assests <a href="#" class="btn purple-stripe" style="margin-left: 33%;" id="shortTermAssets">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Balance Sheet <a href="#" class="btn purple-stripe" style="margin-left: 39%;" id="balanceSheet">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Current Stocks <a href="#" class="btn purple-stripe" style="margin-left: 38.2%;" id="currentStocks">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Income Statement <a href="#" class="btn purple-stripe" style="margin-left: 34%;" id="incomeStatement">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Cash Flow <a href="#" class="btn purple-stripe" style="margin-left: 44%;" id="cashFlow">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Money Flow Index <a href="#" class="btn purple-stripe" style="margin-left: 34.5%;" id="moneyFlowIndex">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Rate Of Change <a href="#" class="btn purple-stripe" style="margin-left: 37%;" id="rateOfChange">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Relative Strength Index <a href="#" class="btn purple-stripe" style="margin-left: 28.5%;" id="relativeStrength">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >NASDAQ <a href="#" class="btn purple-stripe" style="margin-left: 45%;" id="nasdaq">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Dow Jones Industrial Average (DOW) <a href="#" class="btn purple-stripe" style="margin-left: 13%;" id="dow">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="tab-pane" id="retail">
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Top Revenue Products <a href="#" class="btn purple-stripe" style="margin-left: 29%;" id="topRevenueProducts">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Online vs In-store <a href="#" class="btn purple-stripe" style="margin-left: 34.4%;" id="onlineInstore">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="tab-pane" id="sentiment">
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Sentiment Analysis <a href="#" class="btn purple-stripe" style="margin-left: 33%;" id="sentimentAnalysis">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Top Users <a href="#" class="btn purple-stripe" style="margin-left: 43%;" id="topUsers">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Top Hashtags <a href="#" class="btn purple-stripe" style="margin-left: 39%;" id="topHashtags">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Top Keywords <a href="#" class="btn purple-stripe" style="margin-left: 38.3%;" id="topKeywords">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="span12" >
+                            <div class="span6" style="margin: 0px;margin-right: 0px;padding-right: 0px;">
+                                <label >Socail Stats <a href="#" class="btn purple-stripe" style="margin-left: 42%;" id="socialStats">Add</a></label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--END TABS-->
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+
+        </div>
+    </div>
+    <div id="dashboardModal" class="modal hide fade" tabindex="-1"
+         role="dialog" aria-labelledby="myModalLabel3"
+         aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"
+                    aria-hidden="true"></button>
+            <h3 id="myModalLabel3">ADD Dashboard</h3>
+        </div>
+        <div class="modal-body">
+            <div class="control-group">
+                <div class="controls" >
+                    <div class="span3">
+                        <label>Dashboard Title</label>
+                    </div>
+                    <div class="span6">
+                        <input type="text" id="dashboardName">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button  data-dismiss="modal" class="btn blue" id="addDashboardBtn">Add Dashboard</button>
+        </div>
+    </div>
+    <div id="updateDashboardModal" class="modal hide fade" tabindex="-1"
+         role="dialog" aria-labelledby="updateModalLabel"
+         aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"
+                    aria-hidden="true"></button>
+            <h3 id="updateModalLabel">Update Dashboard</h3>
+        </div>
+        <div class="modal-body">
+            <div class="control-group">
+                <div class="controls" >
+                    <div class="span3">
+                        <label>Dashboard Title</label>
+                    </div>
+                    <div class="span6">
+                        <input type="text" id="updateDashboardName">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button  data-dismiss="modal" class="btn blue" id="updateDashboardBtn">Update Dashboard</button>
+        </div>
+    </div>
+</div>
+<!-- END HEADER -->
+	<!-- BEGIN CONTAINER -->	
+	<div class="page-container row-fluid" >
+
+		<!-- BEGIN PAGE -->
+		<div class="page-content" style='margin: 0;margin-top: 20px;'>
+			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<!-- BEGIN PAGE CONTAINER-->
+			<div class="container-fluid" id="sortable_portlets">
+
+				<!-- BEGIN PAGE CONTENT-->
+
+				<!-- END PAGE CONTENT-->
+			</div>
+			<!-- END PAGE CONTAINER-->
+		</div>
+		<!-- END PAGE -->
+	</div>
+	<!-- END CONTAINER -->
+	<!-- BEGIN FOOTER -->
+	<div class="footer">
+		2015 &copy;Enterprise LinchPin.
+		<div class="span pull-right">
+			<span class="go-top"><i class="icon-angle-up"></i></span>
+		</div>
+	</div>
+	<!-- END FOOTER -->
+	<!-- BEGIN JAVASCRIPTS -->
+	<!-- Load javascripts at bottom, this will reduce page load time -->
+
+	<script src="assets/breakpoints/breakpoints.js"></script>
+	<script src="assets/jquery-slimscroll/jquery-ui-1.9.2.custom.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery.blockui.js"></script>
+	<script src="assets/js/jquery.cookie.js"></script>
+	<script src="assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
+
+
+	<!-- ie8 fixes -->
+	<!--[if lt IE 9]>
+	<script src="assets/js/excanvas.js"></script>
+	<script src="assets/js/respond.js"></script>
+	<![endif]-->
+	<script src="assets/js/app.js"></script>
+	<script>
+		jQuery(document).ready(function() {
+			// initiate layout and plugins
+			App.setPage('grids');
+			App.init();
+		});
+	</script>
+<script src="javascripts/menu.js" ></script>
+	<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>
