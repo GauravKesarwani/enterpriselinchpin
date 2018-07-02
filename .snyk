@@ -1,0 +1,13 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.12.0
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:http-signature:20150122':
+    - yql > request > http-signature:
+        patched: '2018-07-02T23:16:47.274Z'
+  'npm:lodash:20180130':
+    - facebook-sdk > npm > cli-table2 > lodash:
+        patched: '2018-07-02T23:16:47.274Z'
+    - facebook-sdk > npm > npm-audit-report > cli-table2 > lodash:
+        patched: '2018-07-02T23:16:47.274Z'
