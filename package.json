@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "body-parser": "~1.12.0",
@@ -15,13 +17,15 @@
     "serve-favicon": "~2.2.0",
     "mongodb": "*",
     "monk": "*",
-    "yql":"*",
-    "facebook-sdk":"*",
-    "twitter":"*",
-    "node-linkedin":"*",
-    "request":"*",
-    "cheerio":"*",
-    "frisby":"*",
-    "jasmine-node":"*"
-  }
+    "yql": "*",
+    "facebook-sdk": "*",
+    "twitter": "*",
+    "node-linkedin": "*",
+    "request": "*",
+    "cheerio": "*",
+    "frisby": "*",
+    "jasmine-node": "*",
+    "snyk": "^1.88.0"
+  },
+  "snyk": true
 }
